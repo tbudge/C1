@@ -27,8 +27,9 @@ int main()
         alarm.rest();
 
         //Wait for the blue button using a while loop
-        while (SW1==0);
-
+        leds = 1;
+        //while (SW1==0);
+        
         
         // For full marks, debounce the switches with suitable delays
 
@@ -39,75 +40,140 @@ int main()
         // For full marks, debounce the switches and use flow control structures and arrays to avoid deep nesting of code
 
         // ***** MODIFY THE CODE BELOW HERE *****
+        
         int buttonCount = 0;
-        int sw1Count = 0;
-        int sw2Count = 0;
-        int sw3Count = 0;
-        int sw4Count = 0;
-        int sw5Count = 0;
+        int count1 = 0;
+        int count2 = 0;
+        int count3 = 0;
+        int count4 = 0;
+        int score = count1 + count2 + count3 + count4;
 
-        while(buttonCount < 4){
-
+        /*while(buttonCount < 4){
+            leds = 2;
             while(SW1 == 0);
             while(SW1 == 1){
                 wait_us(500000);
-                sw1Count = 1;
                 buttonCount = buttonCount + 1;
+                leds = 3;
             }
             
             while(SW2 == 0);
             while(SW2 == 1){
                 wait_us(500000);
-                sw2Count = 1;
                 buttonCount = buttonCount + 1;
+                printf("2");
             }
             while(SW3 == 0);
             while(SW3 == 1){
                 wait_us(500000);
-                sw3Count = 1;
                 buttonCount = buttonCount + 1;
+                printf("3");
             }
             while(SW4 == 0);
             while(SW4 == 1){
                 wait_us(500000);
-                sw4Count = 1;
+                count3 = 1;
                 buttonCount = buttonCount + 1;
+                printf("4");
             }
             while(SW5 == 0);
             while(SW5 == 1){
                 wait_us(500000);
-                sw5Count = 1;
+                count2 = 1;
                 buttonCount = buttonCount + 1;
             }
-        }
+            while(SW1 == 0 || SW2 == 0);
+            while(SW1 == 1 && SW2 == 1){
+                wait_us(500000);
+                count1 = 1;
+                buttonCount = buttonCount + 1;
+            }
+            while(SW2 == 0 || SW3 == 0);
+            while(SW2 == 1 && SW3 == 1){
+                wait_us(500000);
+                count4 = 1;
+                buttonCount = buttonCount + 1;
+            }
+        */
 
+
+
+        //while(SW1 == 0 || SW2 == 0);
+        while(SW1 == 0 || SW2 == 0);
+        if(SW1 == 1 && SW2 == 1){
+            wait_us(500000);
+            
+            while(SW5 == 0);
+            if(SW5 == 1){
+                wait_us(500000);
+             
+                while(SW4 == 0);
+                if(SW4 == 1){
+                    wait_us(500000);
+
+                    while(SW2 == 0 || SW3 == 0);
+                    if(SW2 == 1 && SW3 == 1){
+                        wait_us(500000);
+
+                        int count = 0;
+                        while(count < 3){
+                            leds = 4;
+                            wait_us(500000);
+                            leds = 0;
+                            wait_us(500000);
+                            count++;
+                        }
+                    }    
+                    else{
+                        buttonCount++;
+                    }
+                }        
+                else{
+                    buttonCount++;
+                }
+            }
+            else{
+                buttonCount++;
+            }            
+        }
+        else{
+            buttonCount++;
+            }                
+
+
+        }
         
         
-        
-        //correct
-        int correct(void);
-        {
+
+
+
+
+
+        /*
+        if(score == 4){ 
+        // If the full sequence is entered, correctly, the green LED should flash 3 times
         int count = 0;
         while(count < 3){
             leds = 4;
             wait_us(500000);
             leds = 0;
             wait_us(500000);
+            count++;
         }
         }
-
-
-        //wrong
-        int wrong(void);
-        {
-        leds = 1;
-        alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
-        wait_us(5000000);
-        alarm.rest();
+        else{
+        // If a sequence of inputs was entered incorrectly, the red LED should light and the buzzer should sound for 5 seconds
+            leds = 1;
+            alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
+            wait_us(5000000);
+            alarm.rest();
         }
 
         // ***** MODIFY THE CODE ABOVE HERE *****
     }
 }
+        */
+        if(buttonCount == 4);
+            
 
 
