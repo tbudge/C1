@@ -39,7 +39,25 @@ int main()
         // For full marks, debounce the switches and use flow control structures and arrays to avoid deep nesting of code
 
         // ***** MODIFY THE CODE BELOW HERE *****
+        int count = 0;
 
+        correctArray = 
+        
+        
+        //correct
+        count = 0;
+        while(count < 3){
+            leds = 4;
+            wait_us(500000);
+            leds = 0;
+            wait_us(500000);
+        }
+
+        //wrong
+        leds = 1;
+        alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
+        wait_us(5000000);
+        alarm.rest();
         
 
         // ***** MODIFY THE CODE ABOVE HERE *****
