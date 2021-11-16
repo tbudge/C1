@@ -39,26 +39,72 @@ int main()
         // For full marks, debounce the switches and use flow control structures and arrays to avoid deep nesting of code
 
         // ***** MODIFY THE CODE BELOW HERE *****
-        int count = 0;
+        int buttonCount = 0;
+        int sw1Count = 0;
+        int sw2Count = 0;
+        int sw3Count = 0;
+        int sw4Count = 0;
+        int sw5Count = 0;
 
-        correctArray = 
+        while(buttonCount < 4){
+
+            while(SW1 == 0);
+            while(SW1 == 1){
+                wait_us(500000);
+                sw1Count = 1;
+                buttonCount = buttonCount + 1;
+            }
+            
+            while(SW2 == 0);
+            while(SW2 == 1){
+                wait_us(500000);
+                sw2Count = 1;
+                buttonCount = buttonCount + 1;
+            }
+            while(SW3 == 0);
+            while(SW3 == 1){
+                wait_us(500000);
+                sw3Count = 1;
+                buttonCount = buttonCount + 1;
+            }
+            while(SW4 == 0);
+            while(SW4 == 1){
+                wait_us(500000);
+                sw4Count = 1;
+                buttonCount = buttonCount + 1;
+            }
+            while(SW5 == 0);
+            while(SW5 == 1){
+                wait_us(500000);
+                sw5Count = 1;
+                buttonCount = buttonCount + 1;
+            }
+        }
+
+        
         
         
         //correct
-        count = 0;
+        int correct(void);
+        {
+        int count = 0;
         while(count < 3){
             leds = 4;
             wait_us(500000);
             leds = 0;
             wait_us(500000);
         }
+        }
+
 
         //wrong
+        int wrong(void);
+        {
         leds = 1;
         alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
         wait_us(5000000);
         alarm.rest();
-        
+        }
 
         // ***** MODIFY THE CODE ABOVE HERE *****
     }

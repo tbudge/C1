@@ -10,6 +10,8 @@ int main()
     display.cls();
     display.locate(0, 0);       //Row 0, column 0
     display.printf("Task 2");
+
+
     // ***** MODIFY THE CODE BELOW HERE *****
 
     // Using a do-while-loop, count from 0 to +50 in steps of 5 - print the results on row 2 of the LCD screen every 1 second 
@@ -19,6 +21,9 @@ int main()
         display.printf("%d \n", count);
         count = count + 5;
     } while(count <= 50); 
+
+
+    
     // ***** MODIFY THE CODE ABOVE HERE *****
     leds = 7;
 
