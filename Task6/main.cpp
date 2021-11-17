@@ -40,24 +40,26 @@ int main(){
         // ***** MODIFY THE CODE BELOW HERE *****
         
         int buttonCount = 0;
+        int score = 0;
         while(buttonCount < 4){
 
-            while(SW1 == 0 || SW2 == 0);
+            while(SW1 == 0 || SW2 == 0 || SW3 == 0 || SW4 == 0 || SW5 == 0);
             if(SW1 == 1 && SW2 == 1){
                 wait_us(500000);
                 buttonCount = buttonCount + 1;
+                score = score + 1;
             
-                while(SW5 == 0);
+                while(SW1 == 0 || SW2 == 0 || SW3 == 0 || SW4 == 0 || SW5 == 0);
                 if(SW5 == 1){
                     wait_us(500000);
                     buttonCount = buttonCount + 1;
              
-                    while(SW4 == 0);
+                    while(SW1 == 0 || SW2 == 0 || SW3 == 0 || SW4 == 0 || SW5 == 0);
                     if(SW4 == 1){
                         wait_us(500000);
                         buttonCount = buttonCount + 1;
 
-                        while(SW2 == 0 || SW3 == 0);
+                        while(SW1 == 0 || SW2 == 0 || SW3 == 0 || SW4 == 0 || SW5 == 0);
                         if(SW2 == 1 && SW3 == 1){
                             wait_us(500000);
                             int count = 0;
@@ -83,7 +85,8 @@ int main(){
             }
             else{
                 buttonCount = buttonCount + 1;
-                }                
+                }   
+        leds = buttonCount;          
         }
         
         //wrong
