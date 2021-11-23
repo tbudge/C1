@@ -14,7 +14,31 @@ BusOut leds(TRAF_RED1_PIN, TRAF_YEL1_PIN, TRAF_GRN1_PIN);
 
 //Use this to sound an error
 Buzzer alarm;
-void switchCase();
+
+void switchCase(int button, int* input) {  
+    switch(button) {
+        case 1:
+            input[0] = 1;
+            //leds = 1;
+        break;
+            
+        case 2:
+            input[1] = 2;
+            //leds = 2;
+        break;
+
+        case 3:
+            input[2] = 3;
+            //leds = 3;
+        break;
+
+        case 4:
+            input[3] = 4;
+            //leds = 4;
+        break;
+    }
+}
+
 int main(){
 
     while (true)
@@ -28,7 +52,9 @@ int main(){
 
         //Wait for the blue button using a while loop
         while (SW1==0);
-        
+        wait_us(500000);
+        leds = 4; 
+
         // For full marks, debounce the switches with suitable delays
 
         // This is a "combination lock" activity. Write some code to detect the following sequence of press-and-release inputs
@@ -38,131 +64,69 @@ int main(){
         // For full marks, debounce the switches and use flow control structures and arrays to avoid deep nesting of code
 
         // ***** MODIFY THE CODE BELOW HERE *****
-        leds = 4;
-        int timeDelay = 500000;
-        int buttonCount = 0;
-        int score = 0;
 
-        /*wait_us(timeDelay);
-        while(buttonCount < 4){
-
-            while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
-            wait_us(timeDelay);
-            if(SW1 == 1 && SW2 == 1){
-                wait_us(timeDelay);
-                buttonCount++;
-                score++;
+        int timeDelay = 300000;
+        int button;
+        int score;    
             
-                while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
-                wait_us(timeDelay);
-                if(SW5 == 1){
-                    wait_us(timeDelay);
-                    buttonCount++;
-                    score++;
-                    leds = score;
-             
-                    while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
-                    wait_us(timeDelay);
-                    if(SW4 == 1){
-                        wait_us(timeDelay);
-                        buttonCount++;
-                        score++;
-                        leds = score;
-
-                        while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
-                        wait_us(timeDelay);
-                        if(SW2 == 1 && SW3 == 1){
-                            wait_us(timeDelay);
-                            int count = 0;
-                            while(count < 3){
-                                leds = 4;
-                                wait_us(timeDelay);
-                                leds = 0;
-                                wait_us(timeDelay);
-                                count++;
-                                }
-                        }    
-                        else{
-                            buttonCount = buttonCount + 1;
-                            }
-                    }        
-                    else{
-                        buttonCount = buttonCount + 1;
-                        }
-                }
-                else{
-                    buttonCount = buttonCount + 1;
-                    }            
-            }
-            else{
-                buttonCount = buttonCount + 1;
-                }   
-        leds = score;          
-        }
-        
-        //wrong
-        leds = 1;
-        alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
-        wait_us(timeDelay * 10);
-        alarm.rest();
-        */
         int input[4];
         int correctSequence[4] = {1, 2, 3, 4};
-        int button;
-
-        while(buttonCount <4){
-        while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
-            if(SW1 == 1 && SW2 == 1){
-                button = 1;
-                buttonCount++;
-                switchCase();
-            }
-            else if(SW5 == 1){
-                button = 2;
-                buttonCount++;
-                switchCase();
-                
-            }
-            else if(SW4 == 1){
-                button = 3;
-                buttonCount++;
-                switchCase();
-                
-            }
-            else if(SW2 == 1 && SW3 == 1){
-                button = 4;
-                buttonCount++;
-                switchCase();
-                
-            }
-            else{
-                buttonCount++;
         
 
-
-        void switchCase() {  
-            switch(button){
-                case 1:
-                    input[buttonCount-1] = 1;
-                break;
-            
-                case 2:
-                    input[buttonCount-1] = 2;
-                break;
-
-                case 3:
-                    input[buttonCount-1] = 3;
-                break;
-
-                case 4:
-                    input[buttonCount-1] = 4;
-                break;
-            }
+        for(int buttonCount = 0; buttonCount < 4; buttonCount++, wait_us(timeDelay)){
+            while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0){}
+                wait_us(timeDelay);
+                if(SW1 == 1 && SW2 == 1){
+                    button = 1;
+                    //leds = 1;
+                    switchCase(button, input);
+                }
+                else if(SW5 == 1){
+                    button = 2;
+                    //leds = 2;
+                    switchCase(button, input);
+                
+                }
+                else if(SW4 == 1){
+                    button = 3;
+                    //leds = 3;
+                    switchCase(button, input);
+                
+                }
+                else if(SW2 == 1 && SW3 == 1){
+                    button = 4;
+                    //leds = 4;
+                    switchCase(button, input);
+                
+                }
+                else{
+                    //leds = 7;     leds are for troubleshooting hence are commented out
+                }
         }
-
-
-
-
+                
+        for(int count = 0; count < 4; count++){
+            if(input[count] == correctSequence[count]){
+                score++;
+            }
+            else{}
+        }
+                   
+        if(score == 4){    
+            for(int count = 0; count < 3; count++){
+                leds = 4;
+                wait_us(500000);
+                leds = 0;
+                wait_us(500000);
+                
+            }    
+        }    
+        else{
+            leds = 1;
+            alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
+            wait_us(timeDelay * 10);
+            alarm.rest();            
+        }
+        
         // ***** MODIFY THE CODE ABOVE HERE *****
     }
 }
