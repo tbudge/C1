@@ -14,7 +14,7 @@ BusOut leds(TRAF_RED1_PIN, TRAF_YEL1_PIN, TRAF_GRN1_PIN);
 
 //Use this to sound an error
 Buzzer alarm;
-
+void switchCase();
 int main(){
 
     while (true)
@@ -38,29 +38,36 @@ int main(){
         // For full marks, debounce the switches and use flow control structures and arrays to avoid deep nesting of code
 
         // ***** MODIFY THE CODE BELOW HERE *****
+        leds = 4;
         int timeDelay = 500000;
         int buttonCount = 0;
+        int score = 0;
 
-        wait_us(timeDelay);
+        /*wait_us(timeDelay);
         while(buttonCount < 4){
 
             while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
             wait_us(timeDelay);
             if(SW1 == 1 && SW2 == 1){
                 wait_us(timeDelay);
-                buttonCount = buttonCount + 1;
+                buttonCount++;
+                score++;
             
                 while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
                 wait_us(timeDelay);
                 if(SW5 == 1){
                     wait_us(timeDelay);
-                    buttonCount = buttonCount + 1;
+                    buttonCount++;
+                    score++;
+                    leds = score;
              
                     while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
                     wait_us(timeDelay);
                     if(SW4 == 1){
                         wait_us(timeDelay);
-                        buttonCount = buttonCount + 1;
+                        buttonCount++;
+                        score++;
+                        leds = score;
 
                         while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
                         wait_us(timeDelay);
@@ -90,7 +97,7 @@ int main(){
             else{
                 buttonCount = buttonCount + 1;
                 }   
-        leds = buttonCount;          
+        leds = score;          
         }
         
         //wrong
@@ -98,6 +105,63 @@ int main(){
         alarm.playTone("A", Buzzer::HIGHER_OCTAVE);
         wait_us(timeDelay * 10);
         alarm.rest();
+        */
+        int input[4];
+        int correctSequence[4] = {1, 2, 3, 4};
+        int button;
+
+        while(buttonCount <4){
+        while(SW1 == 0 && SW2 == 0 && SW3 == 0 && SW4 == 0 && SW5 == 0);
+            if(SW1 == 1 && SW2 == 1){
+                button = 1;
+                buttonCount++;
+                switchCase();
+            }
+            else if(SW5 == 1){
+                button = 2;
+                buttonCount++;
+                switchCase();
+                
+            }
+            else if(SW4 == 1){
+                button = 3;
+                buttonCount++;
+                switchCase();
+                
+            }
+            else if(SW2 == 1 && SW3 == 1){
+                button = 4;
+                buttonCount++;
+                switchCase();
+                
+            }
+            else{
+                buttonCount++;
+        
+
+
+        void switchCase() {  
+            switch(button){
+                case 1:
+                    input[buttonCount-1] = 1;
+                break;
+            
+                case 2:
+                    input[buttonCount-1] = 2;
+                break;
+
+                case 3:
+                    input[buttonCount-1] = 3;
+                break;
+
+                case 4:
+                    input[buttonCount-1] = 4;
+                break;
+            }
+        }
+
+
+
 
         // ***** MODIFY THE CODE ABOVE HERE *****
     }
