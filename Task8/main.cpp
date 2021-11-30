@@ -1,5 +1,6 @@
 #include "uop_msb.h"
 using namespace uop_msb;
+DigitalIn SW1(USER_BUTTON);
 
 // 4x4 Array
 double M[4][3] = {
@@ -27,7 +28,37 @@ void displayArray(int rows, int cols, double *Array)
 
 // ***** For (1) WRITE YOUR ARRAY Y HERE *****
 int Y[4][4];
+
+
 // ***** For (3) WRITE YOUR FUNCTION HERE *****
+void multiplier(){
+
+    int MRow = 0, MCol = 0, NRow = 0, NCol = 0;
+    int result;
+    int posY = 0, posX = 0;
+    for(int YRow = 0; YRow < 4; YRow++){
+        MRow = posY;
+        posX = 0;
+
+        for(int YCol = 0; YCol < 4; YCol++){
+            NCol = posX;
+            MCol = 0;
+            NRow = 0;
+            result = 0;
+
+            while (MCol < 3){     
+                result =  result + (M[MRow][MCol] * N[NRow][NCol]);
+                MCol++;
+                NRow++;
+            }
+            Y[YRow][YCol] = result;
+            printf("%d\t", result);
+            posX++;
+        }   
+        printf("\n");
+        posY++;
+    }
+}    
 
 // *****  END YOUR FUNCTION HERE  *****
 
@@ -42,42 +73,41 @@ int main()
 
     // 2. Write a nested loop to perform a matrix multiplication M*N and store the result in Y
 
-/*
-    unsigned MRow = 0, MCol = 0, NRow = 0, NCol = 0;
+    int MRow = 0, MCol = 0, NRow = 0, NCol = 0;
     int result;
+    int posY = 0, posX = 0;
+    for(int YRow = 0; YRow < 4; YRow++){
+        MRow = posY;
+        posX = 0;
 
-    for (unsigned YRow = 0; YRow < 4; YRow ++){
-        for (unsigned YCol = 0; YCol < 4; YCol ++){
+        for(int YCol = 0; YCol < 4; YCol++){
+            NCol = posX;
+            MCol = 0;
             NRow = 0;
             result = 0;
-            for(unsigned MCol = 0; MCol < 4; MCol++){
+
+            while (MCol < 3){     
                 result =  result + (M[MRow][MCol] * N[NRow][NCol]);
+                MCol++;
                 NRow++;
             }
             Y[YRow][YCol] = result;
             printf("%d\t", result);
-            MRow ++;
-            NCol ++;
-        }
+            posX++;
+        }   
         printf("\n");
+        posY++;
     }
-*/      
-        int i, j, k;
-        for(i = 0; i < 4; ++i)
-        for(j = 0; j < 4; ++j)
-            for(k = 0; k < 3; ++k)
-            {
-                Y[i][j] += M[i][k] * N[k][j];
-            }
 
-            printf("Output Matrix: ");
-            for(i = 0; i < 4; ++i)
-            for(j = 0; j < 4; ++j)
-        {
-            printf("%d", Y[i][j]);
-    }
+
 
     // 3. Write a function to multiply two matrices together (see comments above). Include some text code to demonstrate it working
+    while(SW1 == 0){}
+
+        wait_us(500000);
+        printf("Multiplied array is:\n");
+        multiplier();
+    
 
     // ***** MODIFY THE CODE ABOVE HERE *****
 
