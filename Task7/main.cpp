@@ -116,6 +116,14 @@ int main()
         // ***** MODIFY THE CODE BELOW HERE *****
 
         // 1. Write a loop to play the tune in the array `notes`
+        for(int count2 = 0; count2 < 2; count2++){  //nesting the main loop so that the sequence plays twice
+            for(int count = 0; count < 51; count++){
+                player.playTone(notes[count].note, notes[count].octave);   //plays note in set ocatve as defines in array notes
+                wait_us(notes[count].time_ms * 1000);   //plays note for require duration as defined in array notes
+                player.rest();  //stops buzzer playing note
+
+            }
+        }
         //    You may recognise the tune :)
         //    Use player.playTone followed by a player.rest() to get the right duration of note as shown above
         //
